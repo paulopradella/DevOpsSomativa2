@@ -19,7 +19,20 @@
             Primeira Somativa<br>The end is finalliy coming!
         </div>
         <div>
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/60a0Rd6pjrkxjPbaKzXjfq?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" class="spotify"></iframe>
+            <h1>Conversor de medidas</h1>
+            <label for="medida">Digite a medida:</label>
+            <input type="text" id="medida"><br><br>
+            <label for="unidade">Selecione a unidade:</label>
+            <select name="unidade" id="unidade">
+                <option value="metros">metros</option>
+                <option value="centimetros">centímetros</option>
+                <option value="quilometros">quilômetros</option>
+                <option value="milimetros">milímetros</option>
+            </select><br><br>
+            <button id="btnConverter">Converter</button><br><br>
+            <div id="resultado"></div>
+        
+            <script src="app.js"></script>
         </div>
     </section>
     

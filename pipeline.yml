@@ -1,12 +1,32 @@
-node{
-    stage('build'){
-        sh 'python3 -V'
-    }
-    stage('test'){
-        git branch: 'main', url: 'https://github.com/paulopradella/DevOps_PucPR.git'
-        sh 'python3 Hellopuc.py'
-    }
-    stage('deploy'){
-        echo "finished"
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', 
+                    branches: [[name: '*/main']], 
+                    userRemoteConfigs: [[url: 'https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git']]])
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Build and Deploy') {
+            steps {
+                sh 'npm run build'
+                sh 'rsync -avz --delete dist/ USUARIO@SERVIDOR:/CAMINHO/DA/PASTA/DE/DESTINO'
+            }
+        }
     }
 }

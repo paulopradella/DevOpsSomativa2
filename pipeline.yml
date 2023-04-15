@@ -1,0 +1,12 @@
+node{
+    stage('build'){
+        sh 'python3 -V'
+    }
+    stage('test'){
+        git branch: 'main', url: 'https://github.com/paulopradella/DevOps_PucPR.git'
+        sh 'python3 Hellopuc.py'
+    }
+    stage('deploy'){
+        echo "finished"
+    }
+}

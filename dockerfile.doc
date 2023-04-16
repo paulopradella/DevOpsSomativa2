@@ -1,0 +1,19 @@
+#Imagem base
+FROM ubuntu:latest
+#Instala dependencias
+RUN apt-get update
+RUN apt-get upgrade
+RUN apt-get install nginx -y
+RUN apt-get install -y curl openjdk-8-jre-headless 
+# Baixando o ZAP
+RUN curl -sL https://github.com/zaproxy/zaproxy/releases/download/v2.12.0/ZAP_2.12.0_Linux.tar.gz -o /tmp/zap.tar.gz
+# Descompactando o ZAP
+RUN tar -xzf /tmp/zap.tar.gz -C /opt && rm /tmp/zap.tar.g
+
+COPY index.html /var/www/html
+# Configurando o Nginx
+RUN rm /etc/nginx/sites-enabled/default && ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/ && sed -i "s/# server_names_hash_bucket_size.*/server_names_hash_bucket_size 64;/" /etc/nginx/nginx.conf
+RUN /opt/ZAP_2.12.0/zap.sh -cmd -quickurl http://localhost -quickprogress -quickexit -addoninstall sast-scan
+EXPOSE 80
+# Iniciando o servidor Nginx
+CMD ["nginx", "-g", "daemon off;"]

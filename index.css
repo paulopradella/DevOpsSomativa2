@@ -1,0 +1,70 @@
+@font-face {
+    font-family: Neo;
+    src: url(./Assets/Fonts/neo-latina-demo-FFP.ttf);
+}
+
+body {
+    background: #1a1a1a;
+    font-family: Helvetica;
+    max-width: auto;
+    min-height: auto;
+    margin: auto;
+    padding: auto;
+}
+.FlexContainer {
+    margin-top: 10rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height: 80vh;
+    overflow: auto;
+    flex-direction: column;
+}
+
+.FlexContainer div {
+    height: 129px;
+}
+/*--TITULO--*/
+
+#title {
+    font-size: calc(7vw + 2vh + 2vmin);
+    font-weight: bold;
+    color: #DDDEE7;
+    text-align: center;
+    font-family: Neo;
+    margin-top: -0rem;
+    box-sizing: content-box;
+    text-decoration: underline;  
+}           
+#subtitle {
+    font-size: calc(1vw + 2vh + 2vmin);
+    font-weight: bold;
+    color: #DDDEE7;
+    text-align: center;
+    font-family: Neo;
+    margin-top: 1rem;
+}
+
+#title, #subtitle{
+    background-image: -webkit-linear-gradient(75deg, #912437, rgba(255, 99, 71, 0.75));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 5s infinite linear;
+    z-index: -2;
+   
+}   
+@-webkit-keyframes hue {
+    from {
+      -webkit-filter: hue-rotate(0deg);
+    }
+    to {
+      -webkit-filter: hue-rotate(-360deg);
+    }
+  }
+
+.spotify{
+    margin-top: 2rem;
+}

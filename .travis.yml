@@ -9,6 +9,8 @@ jobs:
     - stage: build
       name: "Build Docker image"
       script:
+        - sudo apt-get clean
+        - sudo rm -rf /var/lib/apt/lists/*
         - sudo rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true
         - sudo rm /var/lib/apt/lists/lock || true
         - sudo apt-get update -y && sudo apt-get install -y apt-utils

@@ -13,8 +13,9 @@ jobs:
         - sudo rm -rf /var/lib/apt/lists/*
         - sudo rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true
         - sudo rm /var/lib/apt/lists/lock || true
-        - sudo apt-get update -y && sudo apt-get install -y apt-utils
-        - docker build -t somativa2:latest .
+        - sudo apt-get update --fix-missing
+        - apt-get install -y apt-utils
+        - docker build --no-cache -t somativa2:latest .
 
     - stage: test
       name: "Static Application Security Testing (SAST)"

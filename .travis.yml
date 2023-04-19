@@ -9,6 +9,11 @@ jobs:
     - stage: build
       name: "Build Docker image"
       script:
+        - sudo rm /var/lib/apt/lists/lock
+        - sudo rm /var/cache/apt/archives/lock
+        - sudo rm /var/lib/dpkg/lock*
+        - sudo dpkg --configure -a
+        - sudo apt-get update
         - sudo apt-get clean
         - sudo rm -rf /var/lib/apt/lists/*
         - sudo rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true

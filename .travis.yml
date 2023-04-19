@@ -9,6 +9,7 @@ jobs:
     - stage: build
       name: "Build Docker image"
       script:
+        - sudo rm -f /var/cache/apt/archives/.deb /var/cache/apt/archives/partial/.deb /var/cache/apt/*.bin || true
         - sudo apt-get update && sudo apt-get install -y apt-utils
         - docker build -t somativa2:latest .
 

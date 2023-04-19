@@ -1,0 +1,35 @@
+language: python
+dist: xenial
+
+services:
+  - docker
+
+jobs:
+  include:
+    - stage: build
+      name: "Build Docker image"
+      script:
+        - docker build -t my-app:latest .
+
+    - stage: test
+      name: "Static Application Security Testing (SAST)"
+      script:
+        - echo "Run SAST here"
+
+    - stage: deploy
+      name: "Deploy to Production"
+      script:
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker push my-registry/my-app:latest
+      if: branch = master
+
+notifications:
+  webhooks: https://fathomless-fjord-12345.herokuapp.com/notify
+  on_failure: always
+  on_success: never
+  on_start: never
+
+  telegram:
+    secure: "<encrypted bot key>"
+    chat_id: "<chat_id>"
+    template: "$(cat telegram.sh)"

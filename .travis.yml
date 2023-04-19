@@ -9,25 +9,28 @@ jobs:
     - stage: build
       name: "Build Docker image"
       script:
-        - docker build -t my-app:latest .
+        - docker build -t somativa2:latest .
 
     - stage: test
       name: "Static Application Security Testing (SAST)"
       script:
         - echo "Run SAST here"
+        - npm install htmlhint --save-dev
+        - htmlhint index.html
+
 
     - stage: deploy
       name: "Deploy to Production"
       script:
         - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-        - docker push my-registry/my-app:latest
-      if: branch = master
+        - docker push my-registry/somativa2:latest
+      if: branch = main
 
 notifications:
   webhooks: https://fathomless-fjord-12345.herokuapp.com/notify
   on_failure: always
-  on_success: never
-  on_start: never
+  on_success: always
+  on_start: always
 
   telegram:
     secure: "<encrypted bot key>"

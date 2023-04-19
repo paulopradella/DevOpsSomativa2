@@ -1,8 +1,5 @@
 
-BOT_URL="https://api.telegram.org/bot${6198287682:AAF2sf9Fek1yDr2s-GIWa-FwWO0EgAgqgK4}/sendMessage"
-PARSE_MODE="Markdown"
-echo "${CI_JOB_STATUS}"
-
+#!/bin/bash
 
 MESSAGE="
 -------------------------------------
@@ -15,6 +12,7 @@ ${CI_COMMIT_MESSAGE}
 --------------------------------------
 "
 
-curl -s -X POST ${BOT_URL} -d chat_id=$TELEGRAM_CHAT_ID -d text="${MESSAGE}" -d parse_mode=${PARSE_MODE}
-
-
+curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+    -d chat_id="${TELEGRAM_CHAT_ID}" \
+    -d text="$MESSAGE" \
+    -d parse_mode="Markdown"
